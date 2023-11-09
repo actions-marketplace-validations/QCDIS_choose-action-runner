@@ -1,5 +1,8 @@
 name: 'Choose Action Runner'
 description: 'Choose self-hosted action runner based on their availability'
+branding:
+  icon: server
+  color: yellow
 inputs:
   preferred-runner:
     description: 'Runner to choose if it is available'
