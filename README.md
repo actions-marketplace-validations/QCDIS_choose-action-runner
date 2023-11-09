@@ -1,4 +1,4 @@
-# Chose Action Runner
+# Choose Action Runner
 
 This action checks if some self-hosted runners are online. If they are offline, it falls back to, e.g. GithHub hosted runners. 
 Self-hosted runners are selected based on their name (not label!), for compatibility with runner scale sets.
@@ -19,7 +19,7 @@ jobs:
       runner: ${{ steps.choose-runner.outputs.runner }}
     steps:
       - id: choose-runner
-        uses: QCDIS/chose-action-runner@v1
+        uses: QCDIS/choose-action-runner@v1
         with:
           preferred-runner: my-selfhosted-runner
           fallback-runner: ubuntu-latest

@@ -1,8 +1,8 @@
-name: 'Chose Action Runner'
-description: 'Chose self-hosted action runner based on their availability'
+name: 'Choose Action Runner'
+description: 'Choose self-hosted action runner based on their availability'
 inputs:
   preferred-runner:
-    description: 'Runner to chose if it is available'
+    description: 'Runner to choose if it is available'
     required: true
   fallback-runner:
     description: 'Fallback runner if primary-runner is unavailable'
@@ -17,11 +17,11 @@ inputs:
 outputs:
   runner:
     description: "Chosen runner"
-    value: ${{ steps.chose-runner.outputs.runner }}
+    value: ${{ steps.choose-runner.outputs.runner }}
 runs:
   using: "composite"
   steps:
-    - id: chose-runner
+    - id: choose-runner
       shell: bash
       run: |
         runners=$(curl -s -H "Accept: application/vnd.github+json" -H "Authorization: token ${{ inputs.github-token }}" "https://api.github.com/${{ inputs.runners-holder }}/actions/runners")
