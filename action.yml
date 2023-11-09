@@ -28,11 +28,15 @@ runs:
       shell: bash
       run: |
         runners=$(curl -s -H "Accept: application/vnd.github+json" -H "Authorization: token ${{ inputs.github-token }}" "https://api.github.com/${{ inputs.runners-holder }}/actions/runners")
-        echo $runners
+        echo "All runners:"
+        echo $runners | jq
         available=$(echo "$runners" | jq -r '.runners[] | select(.status == "online")' | jq -r 'select(.name | startswith("${{ inputs.preferred-runner }}"))')
-        echo $available
+        echo "Available runners:"
+        echo $available | jq
         if [ -n "$available" ]; then
+          echo "Choosing runner: ${{ inputs.preferred-runner }}"
           echo "runner=${{ inputs.preferred-runner }}" >> $GITHUB_OUTPUT
         else
+          echo "Choosing runner: ${{ inputs.fallback-runner }}"
           echo "runner=${{ inputs.fallback-runner }}" >> $GITHUB_OUTPUT
         fi
